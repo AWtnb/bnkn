@@ -43,7 +43,7 @@ export class Bnkn {
       });
   }
 
-  static fixDumbQuote(s: string): string {
+  static fixDumbQuotes(s: string): string {
     return s.replace(/["'].+?["']/, (m: string) => {
       const prefix = m.startsWith('"') ? "\u201c" : "\u2018";
       const suffix = prefix == "\u201c" ? "\u201d" : "\u2019";
