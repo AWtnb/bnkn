@@ -1,0 +1,74 @@
+import * as vscode from "vscode";
+
+import { Bnkn, BRACKET_SELECTOR } from "./bnkn";
+
+const formatSelections = (formatter: Function) => {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return;
+  }
+  editor.edit((editBuilder) => {
+    editor.selections
+      .filter((sel) => !sel.isEmpty)
+      .forEach((sel) => {
+        const text = editor.document.getText(sel);
+        const newText = formatter(text);
+        if (text != newText) {
+          editBuilder.replace(sel, newText);
+        }
+      });
+  });
+};
+
+const mainMenu = () => {
+  const funcMap = new Map();
+
+  funcMap.set("capitalize first char", Bnkn.capitalizeFirst);
+  funcMap.set("fix Dumb-Quote", Bnkn.fixDumbQuote);
+  funcMap.set("smart-TitleCase", Bnkn.toSmartTitleCase);
+  funcMap.set("swap human-name position", Bnkn.swapHumanNamePosition);
+  funcMap.set("to double-brackets", Bnkn.toDouble);
+  funcMap.set("to full-width", Bnkn.toFullWidth);
+  funcMap.set("to full-width-brackets", Bnkn.toFullWidthBracket);
+  funcMap.set("to half-width", Bnkn.toHalfWidth);
+  funcMap.set("to half-width-brackets", Bnkn.toHalfWidthBracket);
+  funcMap.set("to single-brackets", Bnkn.toSingle);
+  funcMap.set("trim brackets", Bnkn.trimBrackets);
+
+  const commands = Array.from(funcMap.keys());
+  vscode.window.showQuickPick(commands).then((cmd) => {
+    if (cmd) {
+      const func = funcMap.get(cmd);
+      formatSelections(func);
+    }
+  });
+};
+
+const wrapSelection = (pair: string) => {
+  const prefix = pair.charAt(0);
+  const suffix = pair.charAt(1);
+  return () => {
+    formatSelections((s: string) => prefix + s + suffix);
+  };
+};
+
+const WRAPPER_MAP = new Map();
+WRAPPER_MAP.set("bnkn.wrapByFullWidthDoubleQuote", wrapSelection("“”"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthSingleQuote", wrapSelection("‘’"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthParen", wrapSelection("（）"));
+WRAPPER_MAP.set("bnkn.wrapByTortoiseParen", wrapSelection("〔〕"));
+WRAPPER_MAP.set("bnkn.wrapByCornarBracket", wrapSelection("「」"));
+WRAPPER_MAP.set("bnkn.wrapByDoubleCornarBracket", wrapSelection("『』"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthBracket", wrapSelection("［］"));
+WRAPPER_MAP.set("bnkn.wrapBlackBracket", wrapSelection("【】"));
+
+export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(vscode.commands.registerCommand("bnkn.mainMenu", mainMenu));
+  context.subscriptions.push(vscode.commands.registerCommand("bnkn.selectBracket", () => BRACKET_SELECTOR.expand()));
+
+  WRAPPER_MAP.forEach((func, name) => {
+    context.subscriptions.push(vscode.commands.registerCommand(name, func));
+  });
+}
+
+export function deactivate() {}
