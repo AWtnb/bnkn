@@ -24,9 +24,9 @@ const mainMenu = () => {
   const funcMap = new Map();
 
   funcMap.set("capitalize first char", Bnkn.capitalizeFirst);
-  funcMap.set("fix Dumb-Quote", Bnkn.fixDumbQuote);
+  funcMap.set("fix dumb-quote", Bnkn.fixDumbQuote);
   funcMap.set("smart-TitleCase", Bnkn.toSmartTitleCase);
-  funcMap.set("swap human-name position", Bnkn.swapHumanNamePosition);
+  funcMap.set("swap familyname position", Bnkn.swapHumanNamePosition);
   funcMap.set("to double-brackets", Bnkn.toDouble);
   funcMap.set("to full-width", Bnkn.toFullWidth);
   funcMap.set("to full-width-brackets", Bnkn.toFullWidthBracket);
