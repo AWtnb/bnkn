@@ -23,9 +23,7 @@ const formatSelections = (formatter: Function) => {
 const mainMenu = () => {
   const funcMap = new Map();
 
-  funcMap.set("capitalize first char", Bnkn.capitalizeFirst);
   funcMap.set("fix dumb-quotes", Bnkn.fixDumbQuotes);
-  funcMap.set("smart-TitleCase", Bnkn.toSmartTitleCase);
   funcMap.set("swap familyname position", Bnkn.swapHumanNamePosition);
   funcMap.set("to double-brackets", Bnkn.toDouble);
   funcMap.set("to full-width", Bnkn.toFullWidth);

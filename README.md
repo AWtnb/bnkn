@@ -1,14 +1,12 @@
 # bnkn
 
-Text formatting tool for bibliographic information.
+Text formatting tool for bibliographic information (mainly for Japanese user).
 
 書誌情報の整形に使えそうな各種文字列操作ツールの詰め合わせ。
 
-## メニュー表示：`bnkn.mainMenu`
+## メニュー表示：`bnkn.mainMenu`（デフォルト： <kbd>ctrl+alt+b</kbd> ）
 
-+ 先頭の文字のみ大文字にして残りを小文字にする（`abc` → `Abc`）
 + dumb-quotes（間抜け引用符）を修正する（`"abc"` → `“abc”`）
-+ Title Case（各単語の1文字目を大文字）にしたうえで `setting.json` の `titleCaseExceptions` で指定した単語はすべて小文字にする（`this is a pen` → `This is a Pen`）
 + イニシャル表記した欧米人名の配置を入れ替える（`Wtnb, A.` ↔ `A. Wtnb`）
 + 括弧類を二重にする（`「」‘’"` → `『』“”"`）
 + 括弧類を一重にする（`『』“”"` → `「」‘’"`）

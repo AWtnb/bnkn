@@ -22,17 +22,12 @@
         "title": "bnkn: open main menu"
       }
     ],
-    "configuration": {
-      "title": "bnkn",
-      "properties": {
-        "bnkn.titleCaseExceptions": {
-          "type":"string",
-          "default": "A,About,Aboard,Above,Across,After,Against,Along,Alongside,Am,Amid,Among,An,And,Anti,Are,Around,As,At,Bar,Before,Behind,Below,Beneath,Beside,Besides,Between,Beyond,But,By,Considering,Despite,Down,During,Except,For,From,In,Inside,Into,Is,Less,Like,Minus,Near,Notwithstanding,Of,Off,On,Onto,Or,Opposite,Out,Outside,Over,Past,Pending,Per,Plus,Round,Since,Than,The,Through,Throughout,Till,To,Toward,Under,Underneath,Unless,Unlike,Until,Up,Versus,Via,Vice,With,Within,Without",
-          "description": "comma-separate words as exception in title-casing"
-        }
-      }
-    },
     "keybindings": [
+      {
+        "command": "bnkn.mainMenu",
+        "key": "ctrl+alt+b",
+        "when": "editorTextFocus"
+      },
       {
         "command": "bnkn.selectBracket",
         "key": "alt+shift+8",

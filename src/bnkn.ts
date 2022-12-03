@@ -1,22 +1,11 @@
 import * as vscode from "vscode";
 
-import { TitleCase } from "./title-case";
 import { HumanName } from "./human-name";
 import { BracketSelector } from "./bracket-selector";
 
 export const BRACKET_SELECTOR = new BracketSelector();
 
-const TITLE_CASE_EXCEPTIONS = ((): string[] => {
-  const config = vscode.workspace.getConfiguration("bnkn");
-  const exc: string = config.get("titleCaseExceptions") || "";
-  return exc.split(",").map((x) => x.trim());
-})();
-const SMART_TITLE_CASE = new TitleCase(TITLE_CASE_EXCEPTIONS);
-
 export class Bnkn {
-  static toSmartTitleCase(s: string): string {
-    return SMART_TITLE_CASE.format(s);
-  }
 
   static toDoubleCornerBracket(s: string): string {
     return s.replace(/「/g, "『").replace(/」/g, "』");
@@ -24,23 +13,6 @@ export class Bnkn {
 
   static swapHumanNamePosition(s: string): string {
     return new HumanName(s).swap();
-  }
-
-  static capitalizeFirst(s: string): string {
-    const elems = s.split(/\s+/);
-    return elems
-      .map((x) => x.trim())
-      .map((s, i) => {
-        if (i == 0 || elems[i - 1].endsWith(":")) {
-          return s.charAt(0).toUpperCase() + s.substring(1);
-        }
-        return s.charAt(0).toLowerCase() + s.substring(1);
-      })
-      .join(" ")
-      .replace(/\s+:\s*/, ": ")
-      .replace(/-[A-Z]/g, (m: string) => {
-        return m.toLowerCase();
-      });
   }
 
   static fixDumbQuotes(s: string): string {
