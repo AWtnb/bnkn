@@ -4,6 +4,9 @@
   "description": "Bibliographic information formatting tools",
   "publisher": "awtnb",
   "icon": "images/logo.png",
+  "repository": {
+    "url": "https://github.com/AWtnb/vscode-bnkn"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.71.0"
