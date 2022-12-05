@@ -31,6 +31,7 @@ const mainMenu = () => {
   funcMap.set("to half-width", Bnkn.toHalfWidth);
   funcMap.set("to half-width-brackets", Bnkn.toHalfWidthBracket);
   funcMap.set("to single-brackets", Bnkn.toSingle);
+  funcMap.set("to to-tortoise-brackets", Bnkn.toTortoiseBracket);
   funcMap.set("trim brackets", Bnkn.trimBrackets);
 
   const commands = Array.from(funcMap.keys());

@@ -1,4 +1,3 @@
-import * as vscode from "vscode";
 
 import { HumanName } from "./human-name";
 import { BracketSelector } from "./bracket-selector";
@@ -7,8 +6,13 @@ export const BRACKET_SELECTOR = new BracketSelector();
 
 export class Bnkn {
 
-  static toDoubleCornerBracket(s: string): string {
-    return s.replace(/「/g, "『").replace(/」/g, "』");
+  static toTortoiseBracket(s: string): string {
+    return s.replace(/[（）\(\)]/g, (m:string) => {
+      if (["（", "("].includes(m)) {
+        return "〔"
+      }
+      return "〕"
+    });
   }
 
   static swapHumanNamePosition(s: string): string {

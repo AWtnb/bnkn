@@ -14,6 +14,7 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 + 英数を半角にする（`１２３ａｂｃ` → `123abc`）
 + 括弧類を全角にする（`()[]` → `（）［］`）
 + 括弧類を半角にする（`（）［］` → `()[]`）
++ 丸括弧を亀甲パーレンにする（`（）()` →  `〔〕`）
 + 両端の括弧類を取り除く（`『桃太郎』` → `桃太郎`）
 
 機能は随時追加予定。
