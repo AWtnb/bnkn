@@ -39,42 +39,42 @@
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByFullWidthDoubleQuote",
+        "command": "bnkn.wrapByFullWidthDoubleQuotes",
         "key": "ctrl+alt+w ctrl+2",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByFullWidthSingleQuote",
+        "command": "bnkn.wrapByFullWidthSingleQuotes",
         "key": "ctrl+alt+w ctrl+7",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByFullWidthParen",
+        "command": "bnkn.wrapByFullWidthParens",
         "key": "ctrl+alt+w ctrl+8",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByTortoiseParen",
+        "command": "bnkn.wrapByTortoiseBrackets",
         "key": "ctrl+alt+w ctrl+shift+8",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByCornarBracket",
+        "command": "bnkn.wrapByCornarBrackets",
         "key": "ctrl+alt+w ctrl+[",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByDoubleCornarBracket",
+        "command": "bnkn.wrapByDoubleCornarBrackets",
         "key": "ctrl+alt+w ctrl+shift+[",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapByFullWidthBracket",
+        "command": "bnkn.wrapByFullWidthBrackets",
         "key": "ctrl+alt+w ctrl+]",
         "when": "editorTextFocus"
       },
       {
-        "command": "bnkn.wrapBlackBracket",
+        "command": "bnkn.wrapByBlackBrackets",
         "key": "ctrl+alt+w ctrl+shift+]",
         "when": "editorTextFocus"
       }

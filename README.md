@@ -48,10 +48,11 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 
 | command | 括弧 | デフォルトキー|
 | :--- | :--- | :--- |
+| `bnkn.wrapByBlackBrackets` | `【】`| <kbd>ctrl+alt+w ctrl+shift+]</kbd> |
 | `bnkn.wrapByCornarBracket` | `「」`| <kbd>ctrl+alt+w ctrl+[</kbd> |
-| `bnkn.wrapByDoubleCornarBracket` | `「」`| <kbd>ctrl+alt+w ctrl+shift+[</kbd> |
+| `bnkn.wrapByDoubleCornarBracket` | `『』`| <kbd>ctrl+alt+w ctrl+shift+[</kbd> |
 | `bnkn.wrapByFullWidthBracket` | `［］`| <kbd>ctrl+alt+w ctrl+]</kbd> |
 | `bnkn.wrapByFullWidthDoubleQuote` | `“”`| <kbd>ctrl+alt+w ctrl+2</kbd> |
 | `bnkn.wrapByFullWidthParen` | `（）`| <kbd>ctrl+alt+w ctrl+8</kbd> |
 | `bnkn.wrapByFullWidthSingleQuote` | `‘’`| <kbd>ctrl+alt+w ctrl+7</kbd> |
-| `bnkn.wrapByTortoiseParen` | `〔〕`| <kbd>ctrl+alt+w ctrl+shift+8</kbd> |
+| `bnkn.wrapByTortoiseBracket` | `〔〕`| <kbd>ctrl+alt+w ctrl+shift+8</kbd> |

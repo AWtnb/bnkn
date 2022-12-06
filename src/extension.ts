@@ -72,14 +72,14 @@ const wrapSelection = (pair: string) => {
 };
 
 const WRAPPER_MAP = new Map();
-WRAPPER_MAP.set("bnkn.wrapByFullWidthDoubleQuote", wrapSelection("“”"));
-WRAPPER_MAP.set("bnkn.wrapByFullWidthSingleQuote", wrapSelection("‘’"));
-WRAPPER_MAP.set("bnkn.wrapByFullWidthParen", wrapSelection("（）"));
-WRAPPER_MAP.set("bnkn.wrapByTortoiseParen", wrapSelection("〔〕"));
-WRAPPER_MAP.set("bnkn.wrapByCornarBracket", wrapSelection("「」"));
-WRAPPER_MAP.set("bnkn.wrapByDoubleCornarBracket", wrapSelection("『』"));
-WRAPPER_MAP.set("bnkn.wrapByFullWidthBracket", wrapSelection("［］"));
-WRAPPER_MAP.set("bnkn.wrapBlackBracket", wrapSelection("【】"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthDoubleQuotes", wrapSelection("“”"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthSingleQuotes", wrapSelection("‘’"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthParens", wrapSelection("（）"));
+WRAPPER_MAP.set("bnkn.wrapByTortoiseBrackets", wrapSelection("〔〕"));
+WRAPPER_MAP.set("bnkn.wrapByCornarBrackets", wrapSelection("「」"));
+WRAPPER_MAP.set("bnkn.wrapByDoubleCornarBrackets", wrapSelection("『』"));
+WRAPPER_MAP.set("bnkn.wrapByFullWidthBrackets", wrapSelection("［］"));
+WRAPPER_MAP.set("bnkn.wrapByBlackBrackets", wrapSelection("【】"));
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(vscode.commands.registerCommand("bnkn.mainMenu", mainMenu));
