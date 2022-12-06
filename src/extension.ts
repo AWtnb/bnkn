@@ -2,6 +2,15 @@ import * as vscode from "vscode";
 
 import { Bnkn, BRACKET_SELECTOR } from "./bnkn";
 
+const config = vscode.workspace.getConfiguration("bnkn");
+const skipUnselected: boolean = config.get("skipUnselected") || false;
+
+const getLineRange = (editor: vscode.TextEditor, cursorLine: number): vscode.Range => {
+  const lineStart = new vscode.Position(cursorLine, 0);
+  const lineEnd = new vscode.Position(cursorLine, editor.document.lineAt(cursorLine).text.length);
+  return new vscode.Range(lineStart, lineEnd);
+};
+
 const formatSelections = (formatter: Function) => {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
@@ -9,8 +18,19 @@ const formatSelections = (formatter: Function) => {
   }
   editor.edit((editBuilder) => {
     editor.selections
-      .filter((sel) => !sel.isEmpty)
+      .map((sel) => {
+        if (sel.isEmpty) {
+          if (skipUnselected) {
+            return null;
+          }
+          return getLineRange(editor, sel.active.line);
+        }
+        return sel;
+      })
       .forEach((sel) => {
+        if (!sel) {
+          return;
+        }
         const text = editor.document.getText(sel);
         const newText = formatter(text);
         if (text != newText) {

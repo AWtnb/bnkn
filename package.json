@@ -78,7 +78,17 @@
         "key": "ctrl+alt+w ctrl+shift+]",
         "when": "editorTextFocus"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "bnkn",
+      "properties": {
+        "bnkn.skipUnselected": {
+          "type": "boolean",
+          "default": false,
+          "description": "If this setting is true, only the selected string is processed; if it is false, the entire line is processed if the cursor is unselected."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

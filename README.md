@@ -4,10 +4,14 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 
 書誌情報の整形に使えそうな各種文字列操作ツールの詰め合わせ。
 
++ マルチカーソルに対応しています。
++ `setting.json` の `bnkn.skipUnselected` を `true` にすると、選択されている文字のみ置換します（選択状態にないと何もしません）。
+    + この設定を `false` にすると、非選択状態のときはカーソルのある行全体に対して処理を行います。
+
 ## メニュー表示：`bnkn.mainMenu`（デフォルト： <kbd>ctrl+alt+b</kbd> ）
 
 + dumb-quotes（間抜け引用符）を修正する（`"abc"` → `“abc”`）
-+ イニシャル表記した欧米人名の配置を入れ替える（`Wtnb, A.` ↔ `A. Wtnb`）
++ イニシャル表記した欧米人名の配置を入れ替える（`Wtnb, A.` ←→ `A. Wtnb`）
 + 括弧類を二重にする（`「」‘’"` → `『』“”"`）
 + 括弧類を一重にする（`『』“”"` → `「」‘’"`）
 + 英数を全角にする（`123abc` → `１２３ａｂｃ`）
