@@ -74,11 +74,7 @@ export class BracketSelector {
     return -1;
   }
 
-  expand() {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-      return;
-    }
+  expand(editor:vscode.TextEditor) {
     const ac = new ActiveCursor(editor);
     const beforeCursor = ac.curLine.text.substring(0, ac.selStartPos.character);
     const deltaBack = this.searchBack(beforeCursor);
