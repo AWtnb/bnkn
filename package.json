@@ -15,9 +15,16 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:plaintext",
-    "onLanguage:markdown",
-    "onCommand:bnkn.mainMenu"
+    "onCommand:bnkn.mainMenu",
+    "onCommand:bnkn.selectBracket",
+    "onCommand:bnkn.wrapByFullWidthDoubleQuotes",
+    "onCommand:bnkn.wrapByFullWidthSingleQuotes",
+    "onCommand:bnkn.wrapByFullWidthParens",
+    "onCommand:bnkn.wrapByTortoiseBrackets",
+    "onCommand:bnkn.wrapByCornarBrackets",
+    "onCommand:bnkn.wrapByDoubleCornarBrackets",
+    "onCommand:bnkn.wrapByFullWidthBrackets",
+    "onCommand:bnkn.wrapByBlackBrackets"
   ],
   "main": "./out/extension.js",
   "contributes": {
