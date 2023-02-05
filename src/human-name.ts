@@ -21,11 +21,11 @@ export class HumanName {
     this.familyName = elems.filter((x) => !x.endsWith(".")).join("");
   }
 
-  formatFamilyName(): string {
+  private formatFamilyName(): string {
     return this.familyName.trim();
   }
 
-  formatRestName(): string {
+  private formatRestName(): string {
     return this.restName.replace(/\./g, ". ").replace(/\s+/g, " ").trim();
   }
 
