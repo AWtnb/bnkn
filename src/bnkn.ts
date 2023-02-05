@@ -1,17 +1,15 @@
-
 import { HumanName } from "./human-name";
 import { BracketSelector } from "./bracket-selector";
 
 export const BRACKET_SELECTOR = new BracketSelector();
 
 export class Bnkn {
-
   static toTortoiseBracket(s: string): string {
-    return s.replace(/[（）\(\)]/g, (m:string) => {
+    return s.replace(/[（）\(\)]/g, (m: string) => {
       if (["（", "("].includes(m)) {
-        return "〔"
+        return "〔";
       }
-      return "〕"
+      return "〕";
     });
   }
 
@@ -44,51 +42,51 @@ export class Bnkn {
   }
 
   static toHalfWidth(s: string): string {
-    return s.replace(/[\uff21-\uff3a\uff41-\uff5a\uff10-\uff19]/g, (s: string) => {
-      return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+    return s.replace(/[\uff21-\uff3a\uff41-\uff5a\uff10-\uff19]/g, (m: string) => {
+      return String.fromCharCode(m.charCodeAt(0) - 0xfee0);
     });
   }
 
   static toFullWidth(s: string): string {
-    return s.replace(/[A-Za-z0-9]/g, (s: string) => {
-      return String.fromCharCode(s.charCodeAt(0) + 0xfee0);
+    return s.replace(/[A-Za-z0-9]/g, (m: string) => {
+      return String.fromCharCode(m.charCodeAt(0) + 0xfee0);
     });
   }
 
   static toHalfWidthBracket(s: string): string {
-    return s.replace(/[（）［］]/g, (s: string) => {
-      if (s == "（") return "(";
-      if (s == "）") return ")";
-      if (s == "［") return "[";
+    return s.replace(/[（）［］]/g, (m: string) => {
+      if (m == "（") return "(";
+      if (m == "）") return ")";
+      if (m == "［") return "[";
       return "]";
     });
   }
 
   static toFullWidthBracket(s: string): string {
-    return s.replace(/[\(\)\[\]]/g, (s: string) => {
-      if (s == "(") return "（";
-      if (s == ")") return "）";
-      if (s == "[") return "［";
+    return s.replace(/[\(\)\[\]]/g, (m: string) => {
+      if (m == "(") return "（";
+      if (m == ")") return "）";
+      if (m == "[") return "［";
       return "］";
     });
   }
 
   static toSingle(s: string): string {
-    return s.replace(/[“”『』"]/g, (s: string) => {
-      if (s == "“") return "‘";
-      if (s == "”") return "’";
-      if (s == "『") return "「";
-      if (s == "』") return "」";
+    return s.replace(/[“”『』"]/g, (m: string) => {
+      if (m == "“") return "‘";
+      if (m == "”") return "’";
+      if (m == "『") return "「";
+      if (m == "』") return "」";
       return "'";
     });
   }
 
   static toDouble(s: string): string {
-    return s.replace(/[‘’「」']/g, (s: string) => {
-      if (s == "‘") return "“";
-      if (s == "’") return "”";
-      if (s == "「") return "『";
-      if (s == "」") return "』";
+    return s.replace(/[‘’「」']/g, (m: string) => {
+      if (m == "‘") return "“";
+      if (m == "’") return "”";
+      if (m == "「") return "『";
+      if (m == "」") return "』";
       return '"';
     });
   }
