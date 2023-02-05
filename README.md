@@ -23,6 +23,7 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 + 括弧類を半角にする（`（）［］` → `()[]`）
 + 丸括弧を亀甲パーレンにする（`（）()` →  `〔〕`）
 + 両端の括弧類を取り除く（`『桃太郎』` → `桃太郎`）
++ Oxford-comma の切り替え（`a, b & c` ←→ `a, b, & c`）
 
 機能は随時追加予定。
 

@@ -47,11 +47,11 @@ MAIN_MENU.set("to half-width", Bnkn.toHalfWidth);
 MAIN_MENU.set("to half-width-brackets", Bnkn.toHalfWidthBracket);
 MAIN_MENU.set("to single-brackets", Bnkn.toSingle);
 MAIN_MENU.set("to to-tortoise-brackets", Bnkn.toTortoiseBracket);
+MAIN_MENU.set("toggle Oxford-comma", Bnkn.toggleOxfordComma);
 MAIN_MENU.set("trim brackets", Bnkn.trimBrackets);
 
 
 const mainMenu = (editor: vscode.TextEditor) => {
-
   const commands = Array.from(MAIN_MENU.keys());
   vscode.window.showQuickPick(commands).then((cmd) => {
     if (cmd) {

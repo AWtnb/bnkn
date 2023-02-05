@@ -122,4 +122,11 @@ export class Bnkn {
       return suffix == " " ? m.trim() : m;
     });
   }
+
+  static toggleOxfordComma(s: string): string {
+    if (s.match(/, &/)) {
+      return s.replace(/, &/g, " &");
+    }
+    return s.replace(/ &/g, ", &");
+  }
 }
