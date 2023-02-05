@@ -12,6 +12,9 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 
 + dumb-quotes（間抜け引用符）を修正する（`"abc"` → `“abc”`）
 + イニシャル表記した欧米人名の配置を入れ替える（`Wtnb, A.` ←→ `A. Wtnb`）
++ ピリオド／カンマの全角半角を整える
+    + 直前の文字が ASCII なら半角＆スペース
+    + 直前の文字が ASCII でなければ全角ベタ
 + 括弧類を二重にする（`「」‘’'` → `『』“”"`）
 + 括弧類を一重にする（`『』“”"` → `「」‘’'`）
 + 英数を全角にする（`123abc` → `１２３ａｂｃ`）

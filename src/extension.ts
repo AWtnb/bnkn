@@ -38,6 +38,7 @@ const formatSelections = (editor: vscode.TextEditor, formatter: Function) => {
 
 const MAIN_MENU = new Map();
 MAIN_MENU.set("fix dumb-quotes", Bnkn.fixDumbQuotes);
+MAIN_MENU.set("format period and comma", Bnkn.formatPunctuation);
 MAIN_MENU.set("swap familyname position", Bnkn.swapHumanNamePosition);
 MAIN_MENU.set("to double-brackets", Bnkn.toDouble);
 MAIN_MENU.set("to full-width", Bnkn.toFullWidth);

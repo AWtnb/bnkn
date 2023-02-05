@@ -3,6 +3,27 @@ import { BracketSelector } from "./bracket-selector";
 
 export const BRACKET_SELECTOR = new BracketSelector();
 
+const formatPunctuationWidth = (s: string): string => {
+  const isASCII = (s: string): boolean => {
+    return Boolean(s.match(/[\x00-\x7f]/));
+  };
+  const toFullWidth = (s: string): string => {
+    return s == "." ? "\uff0e" : "\uff0c";
+  };
+  const toHalfWidth = (s: string): string => {
+    return s == "\uff0e" ? "." : ",";
+  };
+
+  return s.replace(/.[\,\.\uff0c\uff0e]/g, (m: string) => {
+    const prefix = m.charAt(0);
+    const punc = m.charAt(1);
+    if (punc == "." || punc == ",") {
+      return isASCII(prefix) ? m : prefix + toFullWidth(punc);
+    }
+    return isASCII(prefix) ? prefix + toHalfWidth(punc) : m;
+  });
+};
+
 export class Bnkn {
   static toTortoiseBracket(s: string): string {
     return s.replace(/[（）\(\)]/g, (m: string) => {
@@ -88,6 +109,17 @@ export class Bnkn {
       if (m == "「") return "『";
       if (m == "」") return "』";
       return '"';
+    });
+  }
+
+  static formatPunctuation(s: string): string {
+    return formatPunctuationWidth(s).replace(/[\.\uff0e,\uff0c]./g, (m: string) => {
+      const punc = m.charAt(0);
+      const suffix = m.charAt(1);
+      if (punc == "." || punc == ",") {
+        return suffix == " " ? m : punc + " " + suffix;
+      }
+      return suffix == " " ? m.trim() : m;
     });
   }
 }
