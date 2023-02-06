@@ -113,10 +113,13 @@ export class Bnkn {
   }
 
   static formatPunctuation(s: string): string {
-    return formatPunctuationWidth(s).replace(/[\.\uff0e,\uff0c]./g, (m: string) => {
+    return formatPunctuationWidth(s).replace(/[\.\,\uff0e\uff0c]./g, (m: string) => {
       const punc = m.charAt(0);
       const suffix = m.charAt(1);
       if (punc == "." || punc == ",") {
+        if (punc == "." && suffix == ",") {
+          return m;
+        }
         return suffix == " " ? m : punc + " " + suffix;
       }
       return suffix == " " ? m.trim() : m;
