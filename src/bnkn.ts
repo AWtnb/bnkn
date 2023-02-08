@@ -117,7 +117,7 @@ export class Bnkn {
       const punc = m.charAt(0);
       const suffix = m.charAt(1);
       if (punc == "." || punc == ",") {
-        if (punc == "." && suffix == ",") {
+        if (punc == "." && [",", ")"].includes(suffix)) {
           return m;
         }
         return suffix == " " ? m : punc + " " + suffix;
