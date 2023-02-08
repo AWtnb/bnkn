@@ -123,7 +123,7 @@ export class Bnkn {
         return suffix == " " ? m : punc + " " + suffix;
       }
       return suffix == " " ? m.trim() : m;
-    });
+    }).replace(/\.\,(?! )/g, "., ");
   }
 
   static toggleOxfordComma(s: string): string {
