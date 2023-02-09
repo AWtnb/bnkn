@@ -14,7 +14,7 @@ const formatPunctuationWidth = (s: string): string => {
     return s == "\uff0e" ? "." : ",";
   };
 
-  return s.replace(/.[\,\.\uff0c\uff0e]/g, (m: string) => {
+  return s.replace(/.[,\.\uff0c\uff0e]/g, (m: string) => {
     const prefix = m.charAt(0);
     const punc = m.charAt(1);
     if (punc == "." || punc == ",") {
@@ -113,7 +113,7 @@ export class Bnkn {
   }
 
   static formatPunctuation(s: string): string {
-    return formatPunctuationWidth(s).replace(/[\.\,\uff0e\uff0c]./g, (m: string) => {
+    return formatPunctuationWidth(s).replace(/[\.,\uff0e\uff0c]./g, (m: string) => {
       const punc = m.charAt(0);
       const suffix = m.charAt(1);
       if (punc == "." || punc == ",") {
@@ -123,7 +123,7 @@ export class Bnkn {
         return suffix == " " ? m : punc + " " + suffix;
       }
       return suffix == " " ? m.trim() : m;
-    }).replace(/\.\,(?! )/g, "., ");
+    }).replace(/\.,(?! )/g, "., ");
   }
 
   static toggleOxfordComma(s: string): string {
