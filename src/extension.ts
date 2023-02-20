@@ -49,6 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
   MAIN_MENU.set("to half-width-brackets", Bnkn.toHalfWidthBracket);
   MAIN_MENU.set("to single-brackets", Bnkn.toSingle);
   MAIN_MENU.set("to to-tortoise-brackets", Bnkn.toTortoiseBracket);
+  MAIN_MENU.set("toggle Comma type", Bnkn.toggleCommaType);
   MAIN_MENU.set("toggle Oxford-comma", Bnkn.toggleOxfordComma);
   MAIN_MENU.set("trim brackets", Bnkn.trimBrackets);
 

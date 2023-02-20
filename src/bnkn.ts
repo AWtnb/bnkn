@@ -135,6 +135,15 @@ export class Bnkn {
     return s.replace(/ &/g, ", &");
   }
 
+  static toggleCommaType(s: string): string {
+    return s.replace(/[、\uff0c]/g, (m: string) => {
+      if (m == "\uff0c") {
+        return "、";
+      }
+      return "\uff0c";
+    });
+  }
+
   static formatHorizontalBars(s: string): string {
     return s.replace(/(?<=\d)-(?=\d)/g, "\u2013").replace(/(?<=[A-Za-z])-(?=[A-Za-z])/g, "\u2010");
   }

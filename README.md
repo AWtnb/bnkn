@@ -15,6 +15,9 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 + ピリオド／カンマの全角半角を整える
     + 直前の文字が ASCII なら半角＆スペース
     + 直前の文字が ASCII でなければ全角ベタ
++ ハイフン／ダーシの整形
+    + 数字の間にあるものはenダーシ（`–`）
+    + アルファベットの間にあるものはハイフン（`‐`）
 + 括弧類を二重にする（`「」‘’'` → `『』“”"`）
 + 括弧類を一重にする（`『』“”"` → `「」‘’'`）
 + 英数を全角にする（`123abc` → `１２３ａｂｃ`）
@@ -24,6 +27,7 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 + 丸括弧を亀甲パーレンにする（`（）()` →  `〔〕`）
 + 両端の括弧類を取り除く（`『桃太郎』` → `桃太郎`）
 + Oxford-comma の切り替え（`a, b & c` ←→ `a, b, & c`）
++ 全角カンマと読点の切り替え（`，` ←→ `、`）
 
 機能は随時追加予定。
 
