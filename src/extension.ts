@@ -77,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand("bnkn.selectBracket", (editor: vscode.TextEditor) => {
-      BRACKET_SELECTOR.expand(editor);
+      editor.selections = BRACKET_SELECTOR.getSelections(editor);
     })
   );
 
