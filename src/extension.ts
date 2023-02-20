@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
-import { Bnkn, BRACKET_SELECTOR } from "./bnkn";
+import { BracketSelector } from "./bracket-selector";
+import { Bnkn } from "./bnkn";
 
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("bnkn");
@@ -75,6 +76,7 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  const BRACKET_SELECTOR = new BracketSelector();
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand("bnkn.selectBracket", (editor: vscode.TextEditor) => {
       editor.selections = BRACKET_SELECTOR.getSelections(editor);

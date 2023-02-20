@@ -1,7 +1,6 @@
 import { HumanName } from "./human-name";
-import { BracketSelector } from "./bracket-selector";
+import { BRACKETS } from "./bracket-selector";
 
-export const BRACKET_SELECTOR = new BracketSelector();
 
 const formatPunctuationWidth = (s: string): string => {
   const isASCII = (s: string): boolean => {
@@ -47,11 +46,10 @@ export class Bnkn {
   }
 
   static trimBrackets(s: string): string {
-    const pairs = BRACKET_SELECTOR.pairs;
-    const lefts = pairs.map((p) => p.charAt(0));
+    const lefts = BRACKETS.map((p) => p.charAt(0));
     const c = s.charAt(0);
     if (lefts.includes(c)) {
-      const found = pairs.filter((x) => x.charAt(0) == c);
+      const found = BRACKETS.filter((x) => x.charAt(0) == c);
       if (found.length) {
         const right = found[0].charAt(1);
         if (s.endsWith(right)) {
