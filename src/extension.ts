@@ -2,15 +2,15 @@ import * as vscode from "vscode";
 
 import { BracketSelector } from "./bracket-selector";
 import { BRACKET_MAPPING } from "./bracket-mapping";
-import { Bnkn } from "./bnkn";
+import { Bnkn, BNKN_MENU } from "./bnkn";
 
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("bnkn");
   const skipUnselected: boolean = config.get("skipUnselected") || false;
 
   const getLineRange = (editor: vscode.TextEditor, cursorLine: number): vscode.Range => {
-    const lineStart = new vscode.Position(cursorLine, 0);
-    const lineEnd = new vscode.Position(cursorLine, editor.document.lineAt(cursorLine).text.length);
+    const lineStart = editor.document.lineAt(cursorLine).range.start;
+    const lineEnd = editor.document.lineAt(cursorLine).range.end;
     return new vscode.Range(lineStart, lineEnd);
   };
 
@@ -39,35 +39,15 @@ export function activate(context: vscode.ExtensionContext) {
     });
   };
 
-  const MAIN_MENU = new Map();
-  MAIN_MENU.set("fix dumb-quotes", Bnkn.fixDumbQuotes);
-  MAIN_MENU.set("format horizontal bars", Bnkn.formatHorizontalBars);
-  MAIN_MENU.set("format period and comma", Bnkn.formatPunctuation);
-  MAIN_MENU.set("swap familyname position", Bnkn.swapHumanNamePosition);
-  MAIN_MENU.set("to double-brackets", Bnkn.toDouble);
-  MAIN_MENU.set("to full-width", Bnkn.toFullWidth);
-  MAIN_MENU.set("to full-width-brackets", Bnkn.toFullWidthBracket);
-  MAIN_MENU.set("to half-width", Bnkn.toHalfWidth);
-  MAIN_MENU.set("to half-width-brackets", Bnkn.toHalfWidthBracket);
-  MAIN_MENU.set("to single-brackets", Bnkn.toSingle);
-  MAIN_MENU.set("to to-tortoise-brackets", Bnkn.toTortoiseBracket);
-  MAIN_MENU.set("toggle Comma type", Bnkn.toggleCommaType);
-  MAIN_MENU.set("toggle Oxford-comma", Bnkn.toggleOxfordComma);
-  MAIN_MENU.set("trim brackets", Bnkn.trimBrackets);
-
-  const mainMenu = (editor: vscode.TextEditor) => {
-    const commands = Array.from(MAIN_MENU.keys());
-    vscode.window.showQuickPick(commands).then((cmd) => {
-      if (cmd) {
-        const func = MAIN_MENU.get(cmd);
-        formatSelections(editor, func);
-      }
-    });
-  };
-
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand("bnkn.mainMenu", (editor: vscode.TextEditor) => {
-      mainMenu(editor);
+      const commands = Array.from(BNKN_MENU.keys());
+      vscode.window.showQuickPick(commands).then((cmd) => {
+        if (cmd) {
+          const func = BNKN_MENU.get(cmd);
+          formatSelections(editor, func);
+        }
+      });
     })
   );
 
