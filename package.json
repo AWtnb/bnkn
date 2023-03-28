@@ -23,14 +23,17 @@
   "activationEvents": [
     "onCommand:bnkn.mainMenu",
     "onCommand:bnkn.selectBracket",
-    "onCommand:bnkn.wrapByFullWidthDoubleQuotes",
-    "onCommand:bnkn.wrapByFullWidthSingleQuotes",
-    "onCommand:bnkn.wrapByFullWidthParens",
-    "onCommand:bnkn.wrapByTortoiseBrackets",
+    "onCommand:bnkn.wrapByBlackBrackets",
+    "onCommand:bnkn.wrapByCircles",
     "onCommand:bnkn.wrapByCornarBrackets",
     "onCommand:bnkn.wrapByDoubleCornarBrackets",
     "onCommand:bnkn.wrapByFullWidthBrackets",
-    "onCommand:bnkn.wrapByBlackBrackets"
+    "onCommand:bnkn.wrapByFullWidthDoubleQuotes",
+    "onCommand:bnkn.wrapByFullWidthParens",
+    "onCommand:bnkn.wrapByFullWidthSingleQuotes",
+    "onCommand:bnkn.wrapBySquares",
+    "onCommand:bnkn.wrapByTortoiseBrackets",
+    "onCommand:bnkn.wrapByTriangles"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -89,6 +92,21 @@
       {
         "command": "bnkn.wrapByBlackBrackets",
         "key": "ctrl+alt+w ctrl+shift+]",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bnkn.wrapByCircles",
+        "key": "ctrl+alt+w ctrl+0",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bnkn.wrapBySquares",
+        "key": "ctrl+alt+w ctrl+4",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bnkn.wrapByTriangles",
+        "key": "ctrl+alt+w ctrl+3",
         "when": "editorTextFocus"
       }
     ],

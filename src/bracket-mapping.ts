@@ -1,0 +1,12 @@
+export const BRACKET_MAPPING = new Map();
+BRACKET_MAPPING.set("wrapByFullWidthDoubleQuotes", "“”");
+BRACKET_MAPPING.set("wrapByFullWidthSingleQuotes", "‘’");
+BRACKET_MAPPING.set("wrapByFullWidthParens", "（）");
+BRACKET_MAPPING.set("wrapByTortoiseBrackets", "〔〕");
+BRACKET_MAPPING.set("wrapByCornarBrackets", "「」");
+BRACKET_MAPPING.set("wrapByDoubleCornarBrackets", "『』");
+BRACKET_MAPPING.set("wrapByFullWidthBrackets", "［］");
+BRACKET_MAPPING.set("wrapByBlackBrackets", "【】");
+BRACKET_MAPPING.set("wrapByCircles", "●●");
+BRACKET_MAPPING.set("wrapBySquares", "■■");
+BRACKET_MAPPING.set("wrapByTriangles", "▲▲");

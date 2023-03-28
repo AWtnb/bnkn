@@ -57,10 +57,13 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 | command | 括弧 | デフォルトキー|
 | :--- | :--- | :--- |
 | `bnkn.wrapByBlackBrackets` | `【】`| <kbd>ctrl+alt+w ctrl+shift+]</kbd> |
-| `bnkn.wrapByCornarBracket` | `「」`| <kbd>ctrl+alt+w ctrl+[</kbd> |
-| `bnkn.wrapByDoubleCornarBracket` | `『』`| <kbd>ctrl+alt+w ctrl+shift+[</kbd> |
-| `bnkn.wrapByFullWidthBracket` | `［］`| <kbd>ctrl+alt+w ctrl+]</kbd> |
-| `bnkn.wrapByFullWidthDoubleQuote` | `“”`| <kbd>ctrl+alt+w ctrl+2</kbd> |
-| `bnkn.wrapByFullWidthParen` | `（）`| <kbd>ctrl+alt+w ctrl+8</kbd> |
-| `bnkn.wrapByFullWidthSingleQuote` | `‘’`| <kbd>ctrl+alt+w ctrl+7</kbd> |
-| `bnkn.wrapByTortoiseBracket` | `〔〕`| <kbd>ctrl+alt+w ctrl+shift+8</kbd> |
+| `bnkn.wrapByCircles` | `●●`| <kbd>ctrl+alt+w ctrl+0</kbd> |
+| `bnkn.wrapByCornarBrackets` | `「」`| <kbd>ctrl+alt+w ctrl+[</kbd> |
+| `bnkn.wrapByDoubleCornarBrackets` | `『』`| <kbd>ctrl+alt+w ctrl+shift+[</kbd> |
+| `bnkn.wrapByFullWidthBrackets` | `［］`| <kbd>ctrl+alt+w ctrl+]</kbd> |
+| `bnkn.wrapByFullWidthDoubleQuotes` | `“”`| <kbd>ctrl+alt+w ctrl+2</kbd> |
+| `bnkn.wrapByFullWidthParens` | `（）`| <kbd>ctrl+alt+w ctrl+8</kbd> |
+| `bnkn.wrapByFullWidthSingleQuotes` | `‘’`| <kbd>ctrl+alt+w ctrl+7</kbd> |
+| `bnkn.wrapByFullWidthSquares` | `■■`| <kbd>ctrl+alt+w ctrl+4</kbd> |
+| `bnkn.wrapByTortoiseBrackets` | `〔〕`| <kbd>ctrl+alt+w ctrl+shift+8</kbd> |
+| `bnkn.wrapByTriangles` | `▲▲`| <kbd>ctrl+alt+w ctrl+shift+3</kbd> |

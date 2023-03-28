@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
 import { BracketSelector } from "./bracket-selector";
+import { BRACKET_MAPPING } from "./bracket-mapping";
 import { Bnkn } from "./bnkn";
 
 export function activate(context: vscode.ExtensionContext) {
@@ -64,12 +65,6 @@ export function activate(context: vscode.ExtensionContext) {
     });
   };
 
-  const wrapSelection = (editor: vscode.TextEditor, pair: string) => {
-    const prefix = pair.charAt(0);
-    const suffix = pair.charAt(1);
-    formatSelections(editor, (s: string) => prefix + s + suffix);
-  };
-
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand("bnkn.mainMenu", (editor: vscode.TextEditor) => {
       mainMenu(editor);
@@ -83,46 +78,20 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByFullWidthDoubleQuotes", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "“”");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByFullWidthSingleQuotes", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "‘’");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByFullWidthParens", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "（）");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByTortoiseBrackets", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "〔〕");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByCornarBrackets", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "「」");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByDoubleCornarBrackets", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "『』");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByFullWidthBrackets", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "［］");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand("bnkn.wrapByBlackBrackets", (editor: vscode.TextEditor) => {
-      wrapSelection(editor, "【】");
-    })
-  );
+  const wrapSelection = (editor: vscode.TextEditor, pair: string) => {
+    const prefix = pair.charAt(0);
+    const suffix = pair.charAt(1);
+    formatSelections(editor, (s: string) => prefix + s + suffix);
+  };
+
+  Array.from(BRACKET_MAPPING.keys()).forEach((cmdName) => {
+    const pair = BRACKET_MAPPING.get(cmdName);
+    const callback = (editor: vscode.TextEditor) => {
+      wrapSelection(editor, pair);
+    };
+    const cmdId = "bnkn." + cmdName;
+    context.subscriptions.push(vscode.commands.registerTextEditorCommand(cmdId, callback));
+  });
 }
 
 export function deactivate() {}
