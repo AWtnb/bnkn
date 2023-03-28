@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 import { BracketSelector } from "./bracket-selector";
 import { BRACKET_MAPPING } from "./bracket-mapping";
-import { Bnkn, BNKN_MENU } from "./bnkn";
+import { BNKN_MENU } from "./bnkn";
 
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("bnkn");
