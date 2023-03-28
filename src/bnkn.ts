@@ -1,24 +1,24 @@
 import { HumanName } from "./human-name";
 import { BRACKETS } from "./bracket-selector";
 
-const formatPunctuationWidth = (s: string): string => {
-  const isASCII = (s: string): boolean => {
-    return Boolean(s.match(/[\x00-\x7f]/));
-  };
-  const toFullWidth = (s: string): string => {
-    return s == "." ? "\uff0e" : "\uff0c";
-  };
-  const toHalfWidth = (s: string): string => {
-    return s == "\uff0e" ? "." : ",";
-  };
+const isASCII = (s: string): boolean => {
+  return Boolean(s.match(/[\x00-\x7f]/));
+};
+const toFullWidthPunc = (s: string): string => {
+  return s == "." ? "\uff0e" : "\uff0c";
+};
+const toHalfWidthPunc = (s: string): string => {
+  return s == "\uff0e" ? "." : ",";
+};
 
+const formatPunctuationWidth = (s: string): string => {
   return s.replace(/.[,\.\uff0c\uff0e]/g, (m: string) => {
     const prefix = m.charAt(0);
     const punc = m.charAt(1);
     if (punc == "." || punc == ",") {
-      return isASCII(prefix) ? m : prefix + toFullWidth(punc);
+      return isASCII(prefix) ? m : prefix + toFullWidthPunc(punc);
     }
-    return isASCII(prefix) ? prefix + toHalfWidth(punc) : m;
+    return isASCII(prefix) ? prefix + toHalfWidthPunc(punc) : m;
   });
 };
 
@@ -112,10 +112,13 @@ export class Bnkn {
   static formatPunctuation(s: string): string {
     return formatPunctuationWidth(s)
       .replace(/[\.,\uff0e\uff0c]./g, (m: string) => {
+        if (m == ".,") {
+          return m;
+        }
         const punc = m.charAt(0);
         const suffix = m.charAt(1);
         if (punc == "." || punc == ",") {
-          if (punc == "." && [",", ")"].includes(suffix)) {
+          if ([")", "'", '"'].includes(suffix)) {
             return m;
           }
           return suffix == " " ? m : punc + " " + suffix;

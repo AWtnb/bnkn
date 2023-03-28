@@ -9,9 +9,8 @@ export function activate(context: vscode.ExtensionContext) {
   const skipUnselected: boolean = config.get("skipUnselected") || false;
 
   const getLineRange = (editor: vscode.TextEditor, cursorLine: number): vscode.Range => {
-    const lineStart = editor.document.lineAt(cursorLine).range.start;
-    const lineEnd = editor.document.lineAt(cursorLine).range.end;
-    return new vscode.Range(lineStart, lineEnd);
+    const line = editor.document.lineAt(cursorLine).range;
+    return new vscode.Range(line.start, line.end);
   };
 
   const formatSelections = (editor: vscode.TextEditor, formatter: Function) => {
