@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 import { BracketSelector } from "./bracket-selector";
 import { BRACKET_MAPPING } from "./bracket-mapping";
-import { BNKN_MENU } from "./bnkn";
+import { BNKN_MENU } from "./bnkn-menu";
 
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("bnkn");
@@ -38,8 +38,17 @@ export function activate(context: vscode.ExtensionContext) {
     });
   };
 
+  Array.from(BNKN_MENU.keys()).forEach((commandName: string) => {
+    const commandId = "bnkn." + commandName;
+    const func = BNKN_MENU.get(commandName);
+    context.subscriptions.push(
+      vscode.commands.registerTextEditorCommand(commandId, (editor: vscode.TextEditor) => {
+        formatSelections(editor, func);
+      })
+    );
+  });
+
   context.subscriptions.push(
-    // それぞれregisterTextEditorCommandでも登録
     vscode.commands.registerTextEditorCommand("bnkn.mainMenu", (editor: vscode.TextEditor) => {
       const commands = Array.from(BNKN_MENU.keys());
       vscode.window.showQuickPick(commands).then((cmd) => {
@@ -64,7 +73,6 @@ export function activate(context: vscode.ExtensionContext) {
     formatSelections(editor, (s: string) => prefix + s + suffix);
   };
 
-  // それぞれregisterTextEditorCommandでも登録
   Array.from(BRACKET_MAPPING.keys()).forEach((cmdName) => {
     const pair = BRACKET_MAPPING.get(cmdName);
     const callback = (editor: vscode.TextEditor) => {

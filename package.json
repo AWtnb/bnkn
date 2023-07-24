@@ -28,6 +28,10 @@
         "title": "bnkn: open main menu"
       },
       {
+        "command": "bnkn.selectBracket",
+        "title": ""
+      },
+      {
         "command": "bnkn.fix-dumb-quotes",
         "title": ""
       },
@@ -81,6 +85,42 @@
       },
       {
         "command": "bnkn.trim-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByFullWidthParens",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByTortoiseBrackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByCornarBrackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByDoubleCornarBrackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByFullWidthBrackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByBlackBrackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByCircles",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapBySquares",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByTriangles",
         "title": ""
       }
     ],
