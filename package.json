@@ -20,27 +20,68 @@
     "Citation",
     "Formatter"
   ],
-  "activationEvents": [
-    "onCommand:bnkn.mainMenu",
-    "onCommand:bnkn.selectBracket",
-    "onCommand:bnkn.wrapByBlackBrackets",
-    "onCommand:bnkn.wrapByCircles",
-    "onCommand:bnkn.wrapByCornarBrackets",
-    "onCommand:bnkn.wrapByDoubleCornarBrackets",
-    "onCommand:bnkn.wrapByFullWidthBrackets",
-    "onCommand:bnkn.wrapByFullWidthDoubleQuotes",
-    "onCommand:bnkn.wrapByFullWidthParens",
-    "onCommand:bnkn.wrapByFullWidthSingleQuotes",
-    "onCommand:bnkn.wrapBySquares",
-    "onCommand:bnkn.wrapByTortoiseBrackets",
-    "onCommand:bnkn.wrapByTriangles"
-  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "bnkn.mainMenu",
         "title": "bnkn: open main menu"
+      },
+      {
+        "command": "bnkn.fix-dumb-quotes",
+        "title": ""
+      },
+      {
+        "command": "bnkn.format-horizontal-bars",
+        "title": ""
+      },
+      {
+        "command": "bnkn.format-punctuation",
+        "title": ""
+      },
+      {
+        "command": "bnkn.swap-familyname-position",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-double-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-full-width",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-full-width-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-half-width",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-half-width-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-single-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.to-to-tortoise-brackets",
+        "title": ""
+      },
+      {
+        "command": "bnkn.toggle-Comma-type",
+        "title": ""
+      },
+      {
+        "command": "bnkn.toggle-Oxford-comma",
+        "title": ""
+      },
+      {
+        "command": "bnkn.trim-brackets",
+        "title": ""
       }
     ],
     "keybindings": [
