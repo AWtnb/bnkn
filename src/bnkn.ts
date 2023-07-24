@@ -27,15 +27,20 @@ export const formatPunctuationWidth = (s: string): string => {
   const stack: string[] = [];
   for (let i = 0; i < s.length; i++) {
     const cur = s.charAt(i);
-    if (i == 0 || [",", ".", ":", "\uff0c", "\uff0e", "\uff1a"].indexOf(cur) == -1) {
+    const last = stack.at(-1) || "";
+    if (i == 0 || (FULLWIDTH_PUNC + HALFWIDTH_PUNC).indexOf(cur) == -1) {
       stack.push(cur);
+      if (cur == " ") {
+        if (last == " " || FULLWIDTH_PUNC.indexOf(last) != -1) {
+          stack.pop();
+        }
+      }
       continue;
     }
-    const last = stack.slice(-1)[0];
     if (last == " ") {
       stack.pop();
     }
-    if (cur == "." || cur == "," || cur == ":") {
+    if (HALFWIDTH_PUNC.indexOf(cur) != -1) {
       if (isASCII(last)) {
         stack.push(cur);
         stack.push(" ");
@@ -51,7 +56,7 @@ export const formatPunctuationWidth = (s: string): string => {
     }
     stack.push(cur);
   }
-  return stack.join("");
+  return stack.join("").trimEnd();
 };
 
 export const toTortoiseBracket = (s: string): string => {
