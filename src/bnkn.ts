@@ -4,22 +4,54 @@ import { BRACKETS } from "./bracket-selector";
 const isASCII = (s: string): boolean => {
   return Boolean(s.match(/[\x00-\x7f]/));
 };
+
+const FULLWIDTH_PUNC = "\uff0e\uff0c\uff1a\uff1b";
+const HALFWIDTH_PUNC = ".,:;";
+
 const toFullWidthPunc = (s: string): string => {
-  return s == "." ? "\uff0e" : "\uff0c";
+  const idx = HALFWIDTH_PUNC.indexOf(s);
+  if (idx < 0) {
+    return s;
+  }
+  return FULLWIDTH_PUNC.charAt(idx);
 };
 const toHalfWidthPunc = (s: string): string => {
-  return s == "\uff0e" ? "." : ",";
+  const idx = FULLWIDTH_PUNC.indexOf(s);
+  if (idx < 0) {
+    return s;
+  }
+  return HALFWIDTH_PUNC.charAt(idx);
 };
 
 const formatPunctuationWidth = (s: string): string => {
-  return s.replace(/.[,\.\uff0c\uff0e]/g, (m: string) => {
-    const prefix = m.charAt(0);
-    const punc = m.charAt(1);
-    if (punc == "." || punc == ",") {
-      return isASCII(prefix) ? m : prefix + toFullWidthPunc(punc);
+  const stack: string[] = [];
+  for (let i = 0; i < s.length; i++) {
+    const cur = s.charAt(i);
+    if (i == 0 || [",", ".", ":", "\uff0c", "\uff0e", "\uff1a"].indexOf(cur) == -1) {
+      stack.push(cur);
+      continue;
     }
-    return isASCII(prefix) ? prefix + toHalfWidthPunc(punc) : m;
-  });
+    const last = stack.slice(-1)[0];
+    if (last == " ") {
+      stack.pop();
+    }
+    if (cur == "." || cur == "," || cur == ":") {
+      if (isASCII(last)) {
+        stack.push(cur);
+        stack.push(" ");
+        continue;
+      }
+      stack.push(toFullWidthPunc(cur));
+      continue;
+    }
+    if (isASCII(last)) {
+      stack.push(toHalfWidthPunc(cur));
+      stack.push(" ");
+      continue;
+    }
+    stack.push(cur);
+  }
+  return stack.join("");
 };
 
 export class Bnkn {

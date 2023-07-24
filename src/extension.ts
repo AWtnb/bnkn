@@ -39,6 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
   };
 
   context.subscriptions.push(
+    // それぞれregisterTextEditorCommandでも登録
     vscode.commands.registerTextEditorCommand("bnkn.mainMenu", (editor: vscode.TextEditor) => {
       const commands = Array.from(BNKN_MENU.keys());
       vscode.window.showQuickPick(commands).then((cmd) => {
@@ -63,6 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
     formatSelections(editor, (s: string) => prefix + s + suffix);
   };
 
+  // それぞれregisterTextEditorCommandでも登録
   Array.from(BRACKET_MAPPING.keys()).forEach((cmdName) => {
     const pair = BRACKET_MAPPING.get(cmdName);
     const callback = (editor: vscode.TextEditor) => {
