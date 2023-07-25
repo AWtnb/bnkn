@@ -25,7 +25,8 @@
     "commands": [
       {
         "command": "bnkn.mainMenu",
-        "title": "bnkn: open main menu"
+        "title": "open main menu",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.selectBracket",
