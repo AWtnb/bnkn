@@ -3,47 +3,18 @@ import * as vscode from "vscode";
 import { BracketSelector } from "./bracket-selector";
 import { BRACKET_MAPPING } from "./bracket-mapping";
 import { BNKN_MENU } from "./bnkn-menu";
+import { TextFormatter } from "./text-formatter";
 
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("bnkn");
   const skipUnselected: boolean = config.get("skipUnselected") || false;
-
-  const getLineRange = (editor: vscode.TextEditor, cursorLine: number): vscode.Range => {
-    const line = editor.document.lineAt(cursorLine).range;
-    return new vscode.Range(line.start, line.end);
-  };
-
-  const formatSelections = (editor: vscode.TextEditor, formatter: Function) => {
-    editor.edit((editBuilder) => {
-      editor.selections
-        .map((sel) => {
-          if (sel.isEmpty) {
-            if (skipUnselected) {
-              return null;
-            }
-            return getLineRange(editor, sel.active.line);
-          }
-          return sel;
-        })
-        .forEach((sel) => {
-          if (!sel) {
-            return;
-          }
-          const text = editor.document.getText(sel);
-          const newText = formatter(text);
-          if (text != newText) {
-            editBuilder.replace(sel, newText);
-          }
-        });
-    });
-  };
 
   Array.from(BNKN_MENU.keys()).forEach((commandName: string) => {
     const commandId = "bnkn." + commandName;
     const func = BNKN_MENU.get(commandName);
     context.subscriptions.push(
       vscode.commands.registerTextEditorCommand(commandId, (editor: vscode.TextEditor) => {
-        formatSelections(editor, func);
+        new TextFormatter(editor, skipUnselected).executeFormat(func);
       })
     );
   });
@@ -54,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showQuickPick(commands).then((cmd) => {
         if (cmd) {
           const func = BNKN_MENU.get(cmd);
-          formatSelections(editor, func);
+          new TextFormatter(editor, skipUnselected).executeFormat(func);
         }
       });
     })
@@ -70,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
   const wrapSelection = (editor: vscode.TextEditor, pair: string) => {
     const prefix = pair.charAt(0);
     const suffix = pair.charAt(1);
-    formatSelections(editor, (s: string) => prefix + s + suffix);
+    new TextFormatter(editor, skipUnselected).executeFormat((s: string) => prefix + s + suffix);
   };
 
   Array.from(BRACKET_MAPPING.keys()).forEach((cmdName) => {
