@@ -89,6 +89,14 @@
         "title": ""
       },
       {
+        "command": "bnkn.wrapByFullWidthDoubleQuotes",
+        "title": ""
+      },
+      {
+        "command": "bnkn.wrapByFullWidthSingleQuotes",
+        "title": ""
+      },
+      {
         "command": "bnkn.wrapByFullWidthParens",
         "title": ""
       },
