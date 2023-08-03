@@ -1,8 +1,15 @@
 import { HumanName } from "./human-name";
 import { BRACKETS } from "./bracket-selector";
+import { BracketTransformer } from "./bracket-transformer";
+
+export const formatBracketWidth = (s: string): string => {
+  const bt = new BracketTransformer(s);
+  return bt.formatWidth();
+};
 
 const isASCII = (s: string): boolean => {
-  return Boolean(s.match(/[\x00-\x7f]/));
+  const c = s.charCodeAt(0);
+  return 0x20 <= c && c <= 0x7e;
 };
 
 const FULLWIDTH_PUNC = "\uff0e\uff0c\uff1a\uff1b";
@@ -104,44 +111,6 @@ export const toHalfWidth = (s: string): string => {
 export const toFullWidth = (s: string): string => {
   return s.replace(/[A-Za-z0-9]/g, (m: string) => {
     return String.fromCharCode(m.charCodeAt(0) + 0xfee0);
-  });
-};
-
-export const toHalfWidthBracket = (s: string): string => {
-  return s.replace(/[（）［］]/g, (m: string) => {
-    if (m == "（") return "(";
-    if (m == "）") return ")";
-    if (m == "［") return "[";
-    return "]";
-  });
-};
-
-export const toFullWidthBracket = (s: string): string => {
-  return s.replace(/[\(\)\[\]]/g, (m: string) => {
-    if (m == "(") return "（";
-    if (m == ")") return "）";
-    if (m == "[") return "［";
-    return "］";
-  });
-};
-
-export const toSingle = (s: string): string => {
-  return s.replace(/[“”『』"]/g, (m: string) => {
-    if (m == "“") return "‘";
-    if (m == "”") return "’";
-    if (m == "『") return "「";
-    if (m == "』") return "」";
-    return "'";
-  });
-};
-
-export const toDouble = (s: string): string => {
-  return s.replace(/[‘’「」']/g, (m: string) => {
-    if (m == "‘") return "“";
-    if (m == "’") return "”";
-    if (m == "「") return "『";
-    if (m == "」") return "』";
-    return '"';
   });
 };
 

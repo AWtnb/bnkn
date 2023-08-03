@@ -37,6 +37,10 @@
         "title": ""
       },
       {
+        "command": "bnkn.format-bracket-width",
+        "title": ""
+      },
+      {
         "command": "bnkn.format-horizontal-bars",
         "title": ""
       },
