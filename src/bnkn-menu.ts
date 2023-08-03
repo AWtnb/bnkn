@@ -1,5 +1,5 @@
 import * as Bnkn from "./bnkn";
-import { toFullWidthBracket, toHalfWidthBracket, toDouble, toSingle } from "./bracket-transformer";
+import { toFullWidthBracket, toHalfWidthBracket, toDouble, toSingle, insertPeriodOfYear, removePeriodOfYear } from "./bracket-transformer";
 
 export const BNKN_MENU = new Map();
 BNKN_MENU.set("fix-dumb-quotes", Bnkn.fixDumbQuotes);
@@ -14,6 +14,8 @@ BNKN_MENU.set("to-half-width", Bnkn.toHalfWidth);
 BNKN_MENU.set("to-half-width-brackets", toHalfWidthBracket);
 BNKN_MENU.set("to-single-brackets", toSingle);
 BNKN_MENU.set("to-to-tortoise-brackets", Bnkn.toTortoiseBracket);
+BNKN_MENU.set("period-of-year-insert", insertPeriodOfYear);
+BNKN_MENU.set("period-of-year-remove", removePeriodOfYear);
 BNKN_MENU.set("toggle-Comma-type", Bnkn.toggleCommaType);
 BNKN_MENU.set("toggle-Oxford-comma", Bnkn.toggleOxfordComma);
 BNKN_MENU.set("trim-brackets", Bnkn.trimBrackets);

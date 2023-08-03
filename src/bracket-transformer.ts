@@ -51,3 +51,22 @@ export class BracketTransformer {
     return this.startsWithAlphabet() ? toHalfWidthBracket(this.line) : toFullWidthBracket(this.line);
   }
 }
+
+export const insertPeriodOfYear = (s: string): string => {
+  return s.replace(/\(\d{4}\).|（\d{4}）./g, (m: string) => {
+    if (m.endsWith(".") || m.endsWith("．")) {
+      return m;
+    }
+    const period = m.startsWith("(") ? "." : "．";
+    return m.substring(0, 6) + period + m.charAt(m.length - 1);
+  });
+};
+
+export const removePeriodOfYear = (s: string): string => {
+  return s.replace(/\(\d{4}\).|（\d{4}）./g, (m: string) => {
+    if (m.endsWith(".") || m.endsWith("．")) {
+      return m.substring(0, 6);
+    }
+    return m;
+  });
+};

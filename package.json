@@ -81,6 +81,14 @@
         "title": ""
       },
       {
+        "command": "bnkn.period-of-year-insert",
+        "title": ""
+      },
+      {
+        "command": "bnkn.period-of-year-remove",
+        "title": ""
+      },
+      {
         "command": "bnkn.toggle-Comma-type",
         "title": ""
       },
