@@ -30,119 +30,148 @@
       },
       {
         "command": "bnkn.selectBracket",
-        "title": ""
+        "title": "select-bracket",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.fix-dumb-quotes",
-        "title": ""
+        "title": "fix-dumb-quotes",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.format-bracket-width",
-        "title": ""
+        "title": "format-bracket-width",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.format-horizontal-bars",
-        "title": ""
+        "title": "format-horizontal-bars",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.format-punctuation",
-        "title": ""
+        "title": "format-punctuation",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.swap-familyname-position",
-        "title": ""
+        "title": "swap-familyname-position",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-double-brackets",
-        "title": ""
+        "title": "to-double-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-full-width",
-        "title": ""
+        "title": "to-full-width",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-full-width-brackets",
-        "title": ""
+        "title": "to-full-width-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-half-width",
-        "title": ""
+        "title": "to-half-width",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-half-width-brackets",
-        "title": ""
+        "title": "to-half-width-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-single-brackets",
-        "title": ""
+        "title": "to-single-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.to-to-tortoise-brackets",
-        "title": ""
+        "title": "to-to-tortoise-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.period-of-year-insert",
-        "title": ""
+        "title": "period-of-year-insert",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.period-of-year-remove",
-        "title": ""
+        "title": "period-of-year-remove",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.toggle-Comma-type",
-        "title": ""
+        "title": "toggle-Comma-type",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.toggle-Oxford-comma",
-        "title": ""
+        "title": "toggle-Oxford-comma",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.trim-brackets",
-        "title": ""
+        "title": "trim-brackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByFullWidthDoubleQuotes",
-        "title": ""
+        "title": "wrapByFullWidthDoubleQuotes",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByFullWidthSingleQuotes",
-        "title": ""
+        "title": "wrapByFullWidthSingleQuotes",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByFullWidthParens",
-        "title": ""
+        "title": "wrapByFullWidthParens",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByTortoiseBrackets",
-        "title": ""
+        "title": "wrapByTortoiseBrackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByCornarBrackets",
-        "title": ""
+        "title": "wrapByCornarBrackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByDoubleCornarBrackets",
-        "title": ""
+        "title": "wrapByDoubleCornarBrackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByFullWidthBrackets",
-        "title": ""
+        "title": "wrapByFullWidthBrackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByBlackBrackets",
-        "title": ""
+        "title": "wrapByBlackBrackets",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByCircles",
-        "title": ""
+        "title": "wrapByCircles",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapBySquares",
-        "title": ""
+        "title": "wrapBySquares",
+        "category": "Bnkn"
       },
       {
         "command": "bnkn.wrapByTriangles",
-        "title": ""
+        "title": "wrapByTriangles",
+        "category": "Bnkn"
       }
     ],
     "keybindings": [
