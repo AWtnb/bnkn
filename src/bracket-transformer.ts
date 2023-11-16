@@ -70,3 +70,73 @@ export const removePeriodOfYear = (s: string): string => {
     return m;
   });
 };
+
+export class NestedBracketHandler {
+  private readonly _openChar: string = "「";
+  private readonly _openAlt: string = "『";
+  private readonly _closeChar: string = "」";
+  private readonly _closeAlt: string = "』";
+  constructor(pair: string = "「」", altPair: string = "『』") {
+    if (pair.length == 2) {
+      this._openChar = pair.charAt(0);
+      this._closeChar = pair.charAt(1);
+    }
+    if (altPair.length == 2) {
+      this._openAlt = altPair.charAt(0);
+      this._closeAlt = altPair.charAt(1);
+    }
+  }
+  private getAlternative(s: string | undefined): string {
+    if (!s) return "";
+    if (s === this._openChar) return this._openAlt;
+    if (s === this._openAlt) return this._openChar;
+    if (s === this._closeChar) return this._closeAlt;
+    if (s === this._closeAlt) return this._closeChar;
+    return s;
+  }
+  private getCorrespond(s: string | undefined): string {
+    if (!s) return "";
+    if (s === this._openChar) return this._closeChar;
+    if (s === this._openAlt) return this._closeAlt;
+    if (s === this._closeChar) return this._openChar;
+    if (s === this._closeAlt) return this._openAlt;
+    return s;
+  }
+  format(s: string): string {
+    const stackToJoin: string[] = [];
+    const openChars: string[] = [];
+
+    for (let i = 0; i < s.length; i++) {
+      const c = s.charAt(i);
+      if (c === this._openChar || c === this._openAlt) {
+        if (openChars.length < 1) {
+          openChars.push(c);
+          stackToJoin.push(c);
+          continue;
+        }
+        const last = openChars.slice(-1)[0];
+        const alt = this.getAlternative(last);
+        if (alt) {
+          openChars.push(alt);
+          stackToJoin.push(alt);
+        }
+        continue;
+      }
+      if (c === this._closeChar || c === this._closeAlt) {
+        if (openChars.length < 1) {
+          stackToJoin.push(c);
+          continue;
+        }
+        const last = openChars.pop();
+        const correspond = this.getCorrespond(last);
+        if (correspond) {
+          stackToJoin.push(correspond);
+        }
+        continue;
+      }
+      stackToJoin.push(c);
+    }
+
+    return stackToJoin.join("");
+  }
+}
