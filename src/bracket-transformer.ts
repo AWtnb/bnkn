@@ -110,19 +110,19 @@ class NestedBracketHandler {
   }
 }
 
-class NestedBracketFormatter {
-  private readonly _line: string;
+export class NestedBracketFormatter {
+  private _formatted: string;
   constructor(s: string) {
-    this._line = s;
+    this._formatted = s;
   }
 
-  execute(pair: string = "「」", altPair: string = "『』"): string {
+  apply(pair: string = "「」", altPair: string = "『』") {
     const stackToJoin: string[] = [];
     const openChars: string[] = [];
     const handler = new NestedBracketHandler(pair, altPair);
 
-    for (let i = 0; i < this._line.length; i++) {
-      const c = this._line.charAt(i);
+    for (let i = 0; i < this.getLine().length; i++) {
+      const c = this.getLine().charAt(i);
       if (handler.isOpen(c)) {
         if (openChars.length < 1) {
           openChars.push(c);
@@ -151,7 +151,10 @@ class NestedBracketFormatter {
       }
       stackToJoin.push(c);
     }
+    this._formatted = stackToJoin.join("");
+  }
 
-    return stackToJoin.join("");
+  getLine(): string {
+    return this._formatted;
   }
 }
