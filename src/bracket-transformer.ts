@@ -71,7 +71,7 @@ export const removePeriodOfYear = (s: string): string => {
   });
 };
 
-export class NestedBracketHandler {
+class NestedBracketHandler {
   private readonly _openChar: string = "「";
   private readonly _openAlt: string = "『";
   private readonly _closeChar: string = "」";
@@ -86,7 +86,13 @@ export class NestedBracketHandler {
       this._closeAlt = altPair.charAt(1);
     }
   }
-  private getAlternative(s: string | undefined): string {
+  isOpen(s: string): boolean {
+    return s === this._openChar || s === this._openAlt;
+  }
+  isClose(s: string): boolean {
+    return s === this._closeChar || s === this._closeAlt;
+  }
+  getAlternative(s: string | undefined): string {
     if (!s) return "";
     if (s === this._openChar) return this._openAlt;
     if (s === this._openAlt) return this._openChar;
@@ -94,7 +100,7 @@ export class NestedBracketHandler {
     if (s === this._closeAlt) return this._closeChar;
     return s;
   }
-  private getCorrespond(s: string | undefined): string {
+  getCorrespond(s: string | undefined): string {
     if (!s) return "";
     if (s === this._openChar) return this._closeChar;
     if (s === this._openAlt) return this._closeAlt;
@@ -102,33 +108,42 @@ export class NestedBracketHandler {
     if (s === this._closeAlt) return this._openAlt;
     return s;
   }
-  format(s: string): string {
+}
+
+class NestedBracketFormatter {
+  private readonly _line: string;
+  constructor(s: string) {
+    this._line = s;
+  }
+
+  execute(pair: string = "「」", altPair: string = "『』"): string {
     const stackToJoin: string[] = [];
     const openChars: string[] = [];
+    const handler = new NestedBracketHandler(pair, altPair);
 
-    for (let i = 0; i < s.length; i++) {
-      const c = s.charAt(i);
-      if (c === this._openChar || c === this._openAlt) {
+    for (let i = 0; i < this._line.length; i++) {
+      const c = this._line.charAt(i);
+      if (handler.isOpen(c)) {
         if (openChars.length < 1) {
           openChars.push(c);
           stackToJoin.push(c);
           continue;
         }
         const last = openChars.slice(-1)[0];
-        const alt = this.getAlternative(last);
+        const alt = handler.getAlternative(last);
         if (alt) {
           openChars.push(alt);
           stackToJoin.push(alt);
         }
         continue;
       }
-      if (c === this._closeChar || c === this._closeAlt) {
+      if (handler.isClose(c)) {
         if (openChars.length < 1) {
           stackToJoin.push(c);
           continue;
         }
         const last = openChars.pop();
-        const correspond = this.getCorrespond(last);
+        const correspond = handler.getCorrespond(last);
         if (correspond) {
           stackToJoin.push(correspond);
         }
