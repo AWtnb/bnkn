@@ -71,90 +71,94 @@ export const removePeriodOfYear = (s: string): string => {
   });
 };
 
-class NestedBracketHandler {
-  private readonly _openChar: string = "「";
+class BracketNestHandler {
+  private readonly _open: string = "「";
+  private readonly _close: string = "」";
   private readonly _openAlt: string = "『";
-  private readonly _closeChar: string = "」";
   private readonly _closeAlt: string = "』";
-  constructor(pair: string = "「」", altPair: string = "『』") {
-    if (pair.length == 2) {
-      this._openChar = pair.charAt(0);
-      this._closeChar = pair.charAt(1);
+  constructor(primary: string = "「」", alternative: string = "『』") {
+    if (primary.length === 2) {
+      this._open = primary.charAt(0);
+      this._close = primary.charAt(1);
     }
-    if (altPair.length == 2) {
-      this._openAlt = altPair.charAt(0);
-      this._closeAlt = altPair.charAt(1);
+    if (alternative.length === 2) {
+      this._openAlt = alternative.charAt(0);
+      this._closeAlt = alternative.charAt(1);
     }
   }
   isOpen(s: string): boolean {
-    return s === this._openChar || s === this._openAlt;
+    return s === this._open || s === this._openAlt;
   }
   isClose(s: string): boolean {
-    return s === this._closeChar || s === this._closeAlt;
+    return s === this._close || s === this._closeAlt;
   }
-  getAlternative(s: string | undefined): string {
-    if (!s) return "";
-    if (s === this._openChar) return this._openAlt;
-    if (s === this._openAlt) return this._openChar;
-    if (s === this._closeChar) return this._closeAlt;
-    if (s === this._closeAlt) return this._closeChar;
+  getAlternative(s: string): string {
+    if (s === this._open) return this._openAlt;
+    if (s === this._openAlt) return this._open;
+    if (s === this._close) return this._closeAlt;
+    if (s === this._closeAlt) return this._close;
     return s;
   }
-  getCorrespond(s: string | undefined): string {
-    if (!s) return "";
-    if (s === this._openChar) return this._closeChar;
+  getCorrespond(s: string): string {
+    if (s === this._open) return this._close;
     if (s === this._openAlt) return this._closeAlt;
-    if (s === this._closeChar) return this._openChar;
+    if (s === this._close) return this._open;
     if (s === this._closeAlt) return this._openAlt;
     return s;
   }
 }
 
-export class NestedBracketFormatter {
-  private _formatted: string;
-  constructor(s: string) {
-    this._formatted = s;
+export class LineWithNestedBracket {
+  private _line: string;
+  private readonly _handler: BracketNestHandler;
+  private readonly _openCharsStack: string[] = [];
+  constructor(line: string, primary: string = "「」", alternative: string = "『』") {
+    this._line = line;
+    this._handler = new BracketNestHandler(primary, alternative);
   }
 
-  apply(pair: string = "「」", altPair: string = "『』") {
-    const stackToJoin: string[] = [];
-    const openChars: string[] = [];
-    const handler = new NestedBracketHandler(pair, altPair);
-
-    for (let i = 0; i < this.getLine().length; i++) {
-      const c = this.getLine().charAt(i);
-      if (handler.isOpen(c)) {
-        if (openChars.length < 1) {
-          openChars.push(c);
-          stackToJoin.push(c);
-          continue;
-        }
-        const last = openChars.slice(-1)[0];
-        const alt = handler.getAlternative(last);
-        if (alt) {
-          openChars.push(alt);
-          stackToJoin.push(alt);
-        }
-        continue;
-      }
-      if (handler.isClose(c)) {
-        if (openChars.length < 1) {
-          stackToJoin.push(c);
-          continue;
-        }
-        const last = openChars.pop();
-        const correspond = handler.getCorrespond(last);
-        if (correspond) {
-          stackToJoin.push(correspond);
-        }
-        continue;
-      }
-      stackToJoin.push(c);
+  private openChar(s: string): string {
+    if (this._openCharsStack.length < 1) {
+      this._openCharsStack.push(s);
+      return s;
     }
-    this._formatted = stackToJoin.join("");
+    const last = this._openCharsStack.slice(-1)[0];
+    if (!last) {
+      return s;
+    }
+    const alt = this._handler.getAlternative(last);
+    this._openCharsStack.push(alt);
+    return alt;
   }
 
-  getLine(): string {
-    return this._formatted;
+  private closeChar(s: string): string {
+    if (this._openCharsStack.length < 1) {
+      return s;
+    }
+    const last = this._openCharsStack.pop();
+    if (!last) {
+      return s;
+    }
+    const correspond = this._handler.getCorrespond(last);
+    return correspond;
+  }
+
+  private onChar(idx: number): string {
+    const c = this._line.charAt(idx);
+    if (this._handler.isOpen(c)) {
+      return this.openChar(c);
+    }
+    if (this._handler.isClose(c)) {
+      return this.closeChar(c);
+    }
+    return c;
+  }
+
+  format(): string {
+    const stack = [];
+    for (let i = 0; i < this._line.length; i++) {
+      stack.push(this.onChar(i));
+    }
+    return stack.join("");
   }
 }

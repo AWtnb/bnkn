@@ -5,6 +5,7 @@ export const BNKN_MENU = new Map();
 BNKN_MENU.set("fix-dumb-quotes", Bnkn.fixDumbQuotes);
 BNKN_MENU.set("format-bracket-width", Bnkn.formatBracketWidth);
 BNKN_MENU.set("format-horizontal-bars", Bnkn.formatHorizontalBars);
+BNKN_MENU.set("format-nested-brackets", Bnkn.formatNestedBrackets);
 BNKN_MENU.set("format-punctuation", Bnkn.formatPunctuation);
 BNKN_MENU.set("swap-familyname-position", Bnkn.swapHumanNamePosition);
 BNKN_MENU.set("to-double-brackets", toDouble);

@@ -1,6 +1,6 @@
 import { HumanName } from "./human-name";
 import { BRACKETS } from "./bracket-selector";
-import { BracketTransformer } from "./bracket-transformer";
+import { BracketTransformer, LineWithNestedBracket } from "./bracket-transformer";
 
 export const formatBracketWidth = (s: string): string => {
   const bt = new BracketTransformer(s);
@@ -151,4 +151,25 @@ export const toggleCommaType = (s: string): string => {
 
 export const formatHorizontalBars = (s: string): string => {
   return s.replace(/(?<=\d)-(?=\d)/g, "\u2013").replace(/(?<=[A-Za-z])-(?=[A-Za-z])/g, "\u2010");
+};
+
+class NestedBracketFormatter {
+  private _formatted: string;
+  constructor(line: string) {
+    this._formatted = line;
+  }
+  apply(primary: string, alternative: string) {
+    const l = new LineWithNestedBracket(this._formatted, primary, alternative);
+    this._formatted = l.format();
+  }
+  getFormattedText(): string {
+    return this._formatted;
+  }
+}
+
+export const formatNestedBrackets = (s: string): string => {
+  const formatter = new NestedBracketFormatter(s);
+  formatter.apply("「」", "『』");
+  formatter.apply("（）", "〔〕");
+  return formatter.getFormattedText();
 };

@@ -49,6 +49,11 @@
         "category": "Bnkn"
       },
       {
+        "command": "bnkn.format-nested-brackets",
+        "title": "format-nested-brackets",
+        "category": "Bnkn"
+      },
+      {
         "command": "bnkn.format-punctuation",
         "title": "format-punctuation",
         "category": "Bnkn"
