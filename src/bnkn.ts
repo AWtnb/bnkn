@@ -1,69 +1,11 @@
 import { HumanName } from "./human-name";
 import { BRACKETS } from "./bracket-selector";
 import { BracketTransformer, LineWithNestedBracket } from "./bracket-transformer";
+import { PuncHandler } from "./punctuation";
 
 export const formatBracketWidth = (s: string): string => {
   const bt = new BracketTransformer(s);
   return bt.formatWidth();
-};
-
-const isASCII = (s: string): boolean => {
-  const c = s.charCodeAt(0);
-  return 0x20 <= c && c <= 0x7e;
-};
-
-const FULLWIDTH_PUNC = "\uff0e\uff0c\uff1a\uff1b";
-const HALFWIDTH_PUNC = ".,:;";
-
-const toFullWidthPunc = (s: string): string => {
-  const idx = HALFWIDTH_PUNC.indexOf(s);
-  if (idx < 0) {
-    return s;
-  }
-  return FULLWIDTH_PUNC.charAt(idx);
-};
-const toHalfWidthPunc = (s: string): string => {
-  const idx = FULLWIDTH_PUNC.indexOf(s);
-  if (idx < 0) {
-    return s;
-  }
-  return HALFWIDTH_PUNC.charAt(idx);
-};
-
-export const formatPunctuationWidth = (s: string): string => {
-  const stack: string[] = [];
-  for (let i = 0; i < s.length; i++) {
-    const cur = s.charAt(i);
-    const last = stack.at(-1) || "";
-    if (i == 0 || (FULLWIDTH_PUNC + HALFWIDTH_PUNC).indexOf(cur) == -1) {
-      stack.push(cur);
-      if (cur == " ") {
-        if (last == " " || FULLWIDTH_PUNC.indexOf(last) != -1) {
-          stack.pop();
-        }
-      }
-      continue;
-    }
-    if (last == " ") {
-      stack.pop();
-    }
-    if (HALFWIDTH_PUNC.indexOf(cur) != -1) {
-      if (isASCII(last)) {
-        stack.push(cur);
-        stack.push(" ");
-        continue;
-      }
-      stack.push(toFullWidthPunc(cur));
-      continue;
-    }
-    if (isASCII(last)) {
-      stack.push(toHalfWidthPunc(cur));
-      stack.push(" ");
-      continue;
-    }
-    stack.push(cur);
-  }
-  return stack.join("").trimEnd();
 };
 
 export const toTortoiseBracket = (s: string): string => {
@@ -115,15 +57,17 @@ export const toFullWidth = (s: string): string => {
 };
 
 export const formatPunctuation = (s: string): string => {
-  return formatPunctuationWidth(s)
-    .replace(/[\.,\uff0e\uff0c]./g, (m: string) => {
+  const handler = new PuncHandler(s);
+  return handler
+    .format()
+    .replace(/[\.,\uff0e\uff0c]./g, (m: string): string => {
       if (m == ".,") {
         return m;
       }
       const punc = m.charAt(0);
       const suffix = m.charAt(1);
       if (punc == "." || punc == ",") {
-        if ([")", "'", '"'].includes(suffix)) {
+        if ([")", "'", '"', "\u201d", "\u2019"].includes(suffix)) {
           return m;
         }
         return suffix == " " ? m : punc + " " + suffix;
