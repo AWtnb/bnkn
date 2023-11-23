@@ -58,23 +58,7 @@ export const toFullWidth = (s: string): string => {
 
 export const formatPunctuation = (s: string): string => {
   const handler = new PuncHandler(s);
-  return handler
-    .format()
-    .replace(/[\.,\uff0e\uff0c]./g, (m: string): string => {
-      if (m == ".,") {
-        return m;
-      }
-      const punc = m.charAt(0);
-      const suffix = m.charAt(1);
-      if (punc == "." || punc == ",") {
-        if ([")", "'", '"', "\u201d", "\u2019"].includes(suffix)) {
-          return m;
-        }
-        return suffix == " " ? m : punc + " " + suffix;
-      }
-      return suffix == " " ? m.trim() : m;
-    })
-    .replace(/\.,(?! )/g, "., ");
+  return handler.format();
 };
 
 export const toggleOxfordComma = (s: string): string => {

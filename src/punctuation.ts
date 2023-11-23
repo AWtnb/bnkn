@@ -10,6 +10,12 @@ class Punctuation {
     this._fullwidth_chars = full;
     this._halfwidth_chars = half;
   }
+  get fullwidth(): string {
+    return this._fullwidth_chars;
+  }
+  get halfwidth(): string {
+    return this._halfwidth_chars;
+  }
   check(s: string): boolean {
     return (this._fullwidth_chars + this._halfwidth_chars).includes(s);
   }
@@ -82,10 +88,30 @@ export class PuncHandler {
     }
     this._stack.push(c);
   }
-  format(): string {
+  private scan() {
     for (let i = 0; i < this._line.length; i++) {
       this.formatChar(i);
     }
-    return this._stack.join("").trimEnd();
+  }
+  format(): string {
+    this.scan();
+    const s = this._stack.join("").trimEnd();
+    const reg = new RegExp("[" + this._punc.halfwidth + this._punc.fullwidth + "].", "g");
+    return s
+      .replace(reg, (m: string): string => {
+        if (m == ".,") {
+          return m;
+        }
+        const punc = m.charAt(0);
+        const suffix = m.charAt(1);
+        if (this._punc.checkHalfwidth(punc)) {
+          return suffix == " " ? m : punc + " " + suffix;
+        }
+        return suffix == " " ? m.trim() : m;
+      })
+      .replace(/ +[\u005d\u0029\uff09\u0022\u0027\u201d\u2019]/g, (m: string): string => {
+        return m.trim();
+      })
+      .replace(/\.,(?! )/g, "., ");
   }
 }
