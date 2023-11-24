@@ -10,3 +10,5 @@ BRACKET_MAPPING.set("wrapByBlackBrackets", "【】");
 BRACKET_MAPPING.set("wrapByCircles", "●●");
 BRACKET_MAPPING.set("wrapBySquares", "■■");
 BRACKET_MAPPING.set("wrapByTriangles", "▲▲");
+BRACKET_MAPPING.set("wrapByAngleBrackets", "〈〉");
+BRACKET_MAPPING.set("wrapByDoubleAngleBrackets", "《》");

@@ -73,3 +73,5 @@ Text formatting tool for bibliographic information (mainly for Japanese user).
 | `bnkn.wrapByFullWidthSquares` | `■■`| <kbd>ctrl+alt+w ctrl+4</kbd> |
 | `bnkn.wrapByTortoiseBrackets` | `〔〕`| <kbd>ctrl+alt+w ctrl+shift+8</kbd> |
 | `bnkn.wrapByTriangles` | `▲▲`| <kbd>ctrl+alt+w ctrl+shift+3</kbd> |
+| `bnkn.wrapByAngleBrackets` | `〈〉`| <kbd>ctrl+alt+w ctrl+a</kbd> |
+| `bnkn.wrapByDoubleAngleBrackets` | `《》`| <kbd>ctrl+alt+w ctrl+shiht+a</kbd> |

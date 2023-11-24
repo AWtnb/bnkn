@@ -177,6 +177,16 @@
         "command": "bnkn.wrapByTriangles",
         "title": "wrapByTriangles",
         "category": "Bnkn"
+      },
+      {
+        "command": "bnkn.wrapByAngleBrackets",
+        "title": "wrapByAngleBrackets",
+        "category": "Bnkn"
+      },
+      {
+        "command": "bnkn.wrapByDoubleAngleBrackets",
+        "title": "wrapByDoubleAngleBrackets",
+        "category": "Bnkn"
       }
     ],
     "keybindings": [
@@ -243,6 +253,16 @@
       {
         "command": "bnkn.wrapByTriangles",
         "key": "ctrl+alt+w ctrl+3",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bnkn.wrapByAngleBrackets",
+        "key": "ctrl+alt+w ctrl+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bnkn.wrapByDoubleAngleBrackets",
+        "key": "ctrl+alt+w ctrl+shift+a",
         "when": "editorTextFocus"
       }
     ],
