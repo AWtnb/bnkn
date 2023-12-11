@@ -41,6 +41,23 @@ class Punctuation {
   }
 }
 
+class Brackets {
+  private readonly _fulls: string[] = ["（）", "「」", "［］", "〔〕", "《》", "〈〉", "『』", "【】", "｛｝", "“”", "‘’"];
+  private readonly _halfs: string[] = ["()", "{}", '""', "''"];
+  get FullPrefixes(): string[] {
+    return this._fulls.map((pair: string): string => pair.charAt(0));
+  }
+  get FullSuffixes(): string[] {
+    return this._fulls.map((pair: string): string => pair.charAt(1));
+  }
+  get HalfPrefixes(): string[] {
+    return this._halfs.map((pair: string): string => pair.charAt(0));
+  }
+  get HalfSuffixes(): string[] {
+    return this._halfs.map((pair: string): string => pair.charAt(1));
+  }
+}
+
 export class PuncHandler {
   private readonly _punc: Punctuation;
   private readonly _stack: string[];
@@ -53,7 +70,7 @@ export class PuncHandler {
   private getLastChar(): string {
     return this._stack.slice(-1)[0] || "";
   }
-  private formatPunc(s: string) {
+  private registerFormatted(s: string) {
     const last = this.getLastChar();
     if (last === "\r" || last === "\n") {
       this._stack.push(s);
@@ -83,7 +100,7 @@ export class PuncHandler {
       if (last === " ") {
         this._stack.pop();
       }
-      this.formatPunc(c);
+      this.registerFormatted(c);
       return;
     }
     this._stack.push(c);
@@ -96,9 +113,12 @@ export class PuncHandler {
   format(): string {
     this.scan();
     const s = this._stack.join("").trimEnd();
-    const reg = new RegExp("[" + this._punc.halfwidth + this._punc.fullwidth + "].", "g");
+    const brackets = new Brackets();
+    const regForPuncTrailingChar = new RegExp("[" + this._punc.halfwidth + this._punc.fullwidth + "].", "g");
+    const regForRemovableSpace1 = new RegExp("[" + this._punc.halfwidth + "] .", "g");
+    const regForRemovableSpace2 = new RegExp(" +.", "g");
     return s
-      .replace(reg, (m: string): string => {
+      .replace(regForPuncTrailingChar, (m: string): string => {
         if (m == ".,") {
           return m;
         }
@@ -109,8 +129,20 @@ export class PuncHandler {
         }
         return suffix == " " ? m.trim() : m;
       })
-      .replace(/ +[\u005d\u0029\uff09\u0022\u0027\u201d\u2019]/g, (m: string): string => {
-        return m.trim();
+      .replace(regForRemovableSpace1, (m: string): string => {
+        const punc = m.charAt(0);
+        const last = m.charAt(2);
+        if (brackets.FullPrefixes.includes(last)) {
+          return punc + last;
+        }
+        return m;
+      })
+      .replace(regForRemovableSpace2, (m: string): string => {
+        const last = m.slice(-1);
+        if (brackets.FullSuffixes.includes(last) || brackets.HalfSuffixes.includes(last)) {
+          return m.trim();
+        }
+        return m;
       })
       .replace(/\.,(?! )/g, "., ");
   }
